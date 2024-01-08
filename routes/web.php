@@ -15,9 +15,16 @@ use App\Http\Controllers\ComicController;
 */
 
 Route::get('/', function () {
-    $comics = config('db.comics');
-    return view('home', compact('comics'));
+    //$comics = config('db.comics');
+    return redirect('/comics');
 })->name('home');
+
+Route::resource('comics', ComicController::class);
+
+/*Route::get('comics', function () {
+    $comics = config('db.comics');
+    return view('comics.index', compact('comics'));
+});*/
 
 
 /*Route::get('/comics/{id}', function ($id) {
@@ -31,4 +38,4 @@ Route::get('/', function () {
     }
 })->name('comics.show');*/
 
-Route::resource('comics', ComicController::class);
+

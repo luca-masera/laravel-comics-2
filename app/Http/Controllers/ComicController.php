@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use app\Models\Comic;
+use App\Models\Comic;
 use Illuminate\Http\Request;
 
 class ComicController extends Controller
@@ -10,7 +10,7 @@ class ComicController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\View\View;
      */
     public function index()
     {

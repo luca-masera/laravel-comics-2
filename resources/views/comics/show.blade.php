@@ -3,7 +3,7 @@
 
 @section('content')
     <main>
-        <section id="card-show" class="container">
+        <section id="comics-show" class="container">
             <h1>Comics</h1>
             <div class="row gy-4">
                 <div class="col-12">
