@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ComicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ Route::get('/', function () {
 })->name('home');
 
 
-Route::get('/comics/{id}', function ($id) {
+/*Route::get('/comics/{id}', function ($id) {
     $comics = config('db.comics');
     if ($id >= 0 && $id < count($comics)) {
         $comic = $comics[$id];
@@ -28,4 +29,6 @@ Route::get('/comics/{id}', function ($id) {
     } else {
         abort(404);
     }
-})->name('comics.show');
+})->name('comics.show');*/
+
+Route::resource('comics', ComicController::class);
