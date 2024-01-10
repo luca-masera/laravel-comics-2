@@ -4,7 +4,12 @@
 @section('content')
     <main>
         <section id="comics-show" class="container">
-            <h1>Comics</h1>
+            <div>
+                <h1>{{ $comic->id }}</h1>
+                <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-danger ">Modifica prodotto</a>
+
+            </div>
+
             <div class="row gy-4">
                 <div class="col-12">
                     <div class="card">
