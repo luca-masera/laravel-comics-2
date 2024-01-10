@@ -5,7 +5,7 @@
     <main>
         <section id="comics-show" class="container">
             <div>
-                <h1>{{ $comic->id }}</h1>
+                <h1>{{ $comic->title }}</h1>
                 <a href="{{ route('comics.edit', $comic->id) }}" class="btn btn-danger ">Modifica prodotto</a>
 
             </div>
