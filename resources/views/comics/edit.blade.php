@@ -27,6 +27,12 @@
                         class="form-control" value="{{ old('price', $comic->price) }}">
 
                 </div>
+                <div>
+                    <label for="type" class="form-label">type:</label>
+                    <input type="text" id="type" name="type" placeholder="Inserisci un type" class="form-control"
+                        value="{{ old('type', $comic->type) }}">
+
+                </div>
 
                 <button type="submit">Invia</button>
                 <button type="reset">Reset</button>

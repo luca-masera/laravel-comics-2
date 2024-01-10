@@ -20,6 +20,7 @@
                             <div class="card-body">
                                 <h2 class="card-title">{{ $comic->title }}</h2>
                                 <p class="card-text"> {{ $comic->description }} </p>
+                                <p> {{ $comic->type }} </p>
                                 <p> {{ $comic->price }} </p>
                                 <a href="{{ route('home') }}" class="btn btn-danger ">Vedi tutti i comics</a>
                             </div>

@@ -41,14 +41,17 @@ class ComicController extends Controller
         //
         $formData = $request->all();
         $newComic = new Comic();
+        //$newComic->fill($formData);
         $newComic->title = $formData["title"];
         $newComic->description = $formData["description"];
         $newComic->price = $formData["price"];
+        $newComic->type = $formData["type"];
         $newComic->sale_date = '2024-08-01';
         $newComic->series = 'random';
-        $newComic->type = $formData["type"];
+
         $newComic->save();
-        return to_route('comics.index');
+
+        return to_route('comics.index', $newComic->id);
     }
 
     /**
@@ -89,6 +92,10 @@ class ComicController extends Controller
         $comic->title = $formData["title"];
         $comic->description = $formData["description"];
         $comic->price = $formData["price"];
+        $comic->type = $formData["type"];
+        $comic->sale_date = '2024-08-01';
+        $comic->series = 'random';
+        //$comic->fill($formData);
         $comic->update();
         return to_route('comics.index', $comic->id);
     }
@@ -106,6 +113,6 @@ class ComicController extends Controller
     {
         //
         $comic->delete();
-        return to_route('comics.index');
+        return to_route('comics.index')->with('message', "Il prodotto '$comic->title' è stato eliminato");
     }
 }

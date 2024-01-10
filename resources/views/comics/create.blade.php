@@ -24,6 +24,13 @@
                         class="form-control">
 
                 </div>
+                <div>
+                    <label for="type" class="form-label">type:</label>
+                    <input type="text" id="type" name="type" placeholder="Inserisci un type"
+                        class="form-control">
+
+                </div>
+
 
                 <button type="submit">Invia</button>
             </form>
