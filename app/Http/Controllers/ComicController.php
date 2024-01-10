@@ -79,13 +79,22 @@ class ComicController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Comic $comic;
+     *
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comic $comic)
     {
         //
+        $formData = $request->all();
+        $comic->title = $formData["title"];
+        $comic->description = $formData["description"];
+        $comic->price = $formData["price"];
+        $comic->update();
+        return to_route('comics.index', $comic->id);
     }
+
+
+
 
     /**
      * Remove the specified resource from storage.
