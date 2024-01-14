@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Comic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreComicRequest;
+use App\Http\Requests\UpdateComicRequest;
+
 
 class ComicController extends Controller
 {
@@ -36,29 +40,19 @@ class ComicController extends Controller
      * @param  \Illuminate\Http\Request  $request
      *
      */
-    public function store(Request $request)
+    public function store(StoreComicRequest $request)
     {
         //
 
-        $request->validate([
-            'title' => 'required|min:10|max:200|unique',
-            'description' => 'required|min:50|max:255',
-            'type' => 'required|min:5|max:20',
-            'price' => 'required|min:20',
-        ]);
-        $formData = $request->all();
+        $formData = $request->validated();
         $newComic = new Comic();
-        //$newComic->fill($formData);
-        $newComic->title = $formData["title"];
-        $newComic->description = $formData["description"];
-        $newComic->price = $formData["price"];
-        $newComic->type = $formData["type"];
+        $newComic->fill($formData);
         $newComic->sale_date = '2024-08-01';
         $newComic->series = 'random';
 
         $newComic->save();
 
-        return to_route('comics.index', $newComic->id);
+        return to_route('comics.show', $newComic->id);
     }
 
     /**
@@ -92,25 +86,16 @@ class ComicController extends Controller
      * @param  \App\Models\Comic $comic;
      *
      */
-    public function update(Request $request, Comic $comic)
+    public function update(UpdateComicRequest $request, Comic $comic)
     {
-        //
-        $request->validate([
-            'title' => 'required|min:10|max:200|unique',
-            'description' => 'required|min:50|max:255',
-            'type' => 'required|min:5|max:20',
-            'price' => 'required|min:20',
-        ]);
-        $formData = $request->all();
-        $comic->title = $formData["title"];
-        $comic->description = $formData["description"];
-        $comic->price = $formData["price"];
-        $comic->type = $formData["type"];
+
+        $formData = $request->validated();
+        $comic->fill($formData);
         $comic->sale_date = '2024-08-01';
         $comic->series = 'random';
-        //$comic->fill($formData);
+
         $comic->update();
-        return to_route('comics.index', $comic->id);
+        return to_route('comics.show', $comic->id);
     }
 
 
@@ -128,4 +113,26 @@ class ComicController extends Controller
         $comic->delete();
         return to_route('comics.index')->with('message', "Il prodotto '$comic->title' è stato eliminato");
     }
+
+    private function validation($data)
+    {
+        $validator = Validator::make(
+            $data,
+            [
+                'title' => 'required|min:3',
+                'price' => 'required',
+                'thumb' => 'url'
+            ],
+            [
+                'title.required' => 'Il nome del titolo è obbligatorio',
+                'title.min' => 'Il titolo deve avere almeno :min caratteri',
+                'price.required' => 'Il prezzo è fortemente consigliato',
+                'thumb.url' => 'L\'immagine deve contenere url valido',
+
+            ]
+        )->validate();
+        return $validator;
+
+    }
+
 }
